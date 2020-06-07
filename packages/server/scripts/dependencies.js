@@ -1,5 +1,5 @@
-import merge from 'deepmerge';
-import match from 'minimatch';
+const merge = require('deepmerge');
+const match = require('minimatch');
 
 const isPassIncudeExclude = (value, include, exclude) => {
   let shouldBeIncluded = include.length > 0;
@@ -67,5 +67,5 @@ function getEveryDependency(pathToPackageJSON, options = GET_EVERY_DEPENDENCY_DE
 }
 
 module.exports = {
-  getEveryDependency
-}
+  getEveryDependency,
+};
