@@ -14,17 +14,28 @@ const typeDefs = gql`
 
   type User {
     id: ID!
-    email: Email!
+    email: String!
     name: String!
   }
 
   input CreateUserInput {
-    email: Email!
+    email: String!
     name: String!
   }
 
   input UpdateUserInput {
-    email: Email
+    email: String
     name: String
   }
 `;
+
+const server = new ApolloServer({
+  typeDefs,
+  introspection: true,
+  playground: true,
+  cors: true,
+});
+
+server.listen(process.env.PORT).then(({ url }) => {
+  console.log(`🚀  Server ready at ${url}`);
+});
