@@ -1,4 +1,6 @@
 import { ApolloServer, gql } from 'apollo-server';
+import { connect } from './mongo';
+import { getUsers } from './models/User';
 
 const typeDefs = gql`
   type Query {
@@ -36,6 +38,11 @@ const server = new ApolloServer({
   cors: true,
 });
 
-server.listen(process.env.PORT).then(({ url }) => {
+server.listen(process.env.PORT ?? 4201).then(async ({ url }) => {
   console.log(`🚀  Server ready at ${url}`);
+
+  await connect();
+
+  const u = await getUsers();
+  console.log(u);
 });
