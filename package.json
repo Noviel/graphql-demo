@@ -7,7 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev:client": "yarn workspace @graphql-demo/client dev"
+    "dev:client": "yarn workspace @graphql-demo/client dev",
+    "build:server": "yarn workspace @graphql-demo/server build"
   },
   "workspaces": {
     "packages": [
