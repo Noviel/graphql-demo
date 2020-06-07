@@ -6,7 +6,8 @@
   "author": "Alexander \"Snov\" Semenchenko",
   "license": "MIT",
   "scripts": {
-    "dev": "next dev"
+    "dev": "next dev",
+    "build": "next build"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
