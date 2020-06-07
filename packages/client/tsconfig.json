@@ -1,7 +1,6 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "../../",
+    "baseUrl": "./",
     "allowJs": true,
     "target": "es5",
     "module": "esnext",
@@ -13,16 +12,27 @@
     "noEmit": true,
     "paths": {
       "@/*": [
-        "./packages/client/*"
+        "./*"
       ],
       "src/*": [
-        "./packages/client/src/*"
+        "./src/*"
       ]
-    }
+    },
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }
