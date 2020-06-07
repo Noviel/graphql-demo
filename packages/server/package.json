@@ -1,0 +1,15 @@
+{
+  "name": "@graphql-demo/server",
+  "version": "0.1.0",
+  "description": "Graphql Demo: server",
+  "main": "src/index.ts",
+  "author": "Alexander \"Snov\" Semenchenko",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^2.14.2",
+    "deepmerge": "^4.2.2",
+    "graphql": "^15.1.0",
+    "minimatch": "^3.0.4",
+    "mongoose": "^5.9.18"
+  }
+}

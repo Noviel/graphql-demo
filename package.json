@@ -1,0 +1,34 @@
+{
+  "name": "graphql-demo",
+  "version": "0.1.0",
+  "description": "Graphql Demo: client and server",
+  "main": "index.js",
+  "author": "Alexander \"Snov\" Semenchenko",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev:client": "yarn workspace @graphql-demo/client dev"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/**"
+    ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.1.0",
+    "@typescript-eslint/parser": "^3.1.0",
+    "eslint": "^7.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-react": "^7.20.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.9",
+    "prettier": "^2.0.5"
+  },
+  "dependencies": {
+    "@zeit/ncc": "^0.22.3",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "typescript": "^3.9.5"
+  }
+}
