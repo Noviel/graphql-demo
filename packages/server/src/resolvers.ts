@@ -7,11 +7,7 @@ type Context = { dataSources: DataSources };
 export const resolvers: Resolvers<Context> = {
   Query: {
     user: async (_, params, { dataSources }) => {
-      const user = dataSources.userAPI.getUser(params);
-      if (!user) {
-        throw new Error('User not found');
-      }
-      return user;
+      return dataSources.userAPI.getUser(params);
     },
     users: async (_, { skip, limit }, { dataSources }) => {
       return dataSources.userAPI.getUsersList({ skip, limit });
@@ -19,19 +15,13 @@ export const resolvers: Resolvers<Context> = {
   },
   Mutation: {
     createUser: async (_, params, { dataSources }) => {
-      const result = await dataSources.userAPI.createUser(params);
-
-      return result;
+      return dataSources.userAPI.createUser(params);
     },
     updateUser: async (_, params, { dataSources }) => {
-      const result = await dataSources.userAPI.updateUser(params);
-
-      return result;
+      return dataSources.userAPI.updateUser(params);
     },
     deleteUser: async (_, { id }, { dataSources }) => {
-      const result = await dataSources.userAPI.deleteUser(id);
-
-      return result;
+      return dataSources.userAPI.deleteUser(id);
     },
   },
 };
