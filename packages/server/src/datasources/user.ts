@@ -1,6 +1,6 @@
 import { DataSource, DataSourceConfig } from 'apollo-datasource';
 
-import { UserCreateParams, User, UserGetListPArams, UserUpdateParams } from '../models/User';
+import { UserCreateParams, User, UserGetListParams, UserUpdateParams } from '../models/User';
 
 type UserDocument = {
   name: string;
@@ -17,16 +17,21 @@ const userDto = ({ _id, name, email }: UserDocument) => ({
 export class UserAPI extends DataSource {
   initialize(config: DataSourceConfig<any>) {}
 
+  async getUser(id: string) {
+    const doc = await User.findById(id);
+    return doc ? userDto(doc as any) : null;
+  }
+
+  async getUsersList(params: UserGetListParams) {
+    const docs = await User.find({}, null, params);
+    return (docs as any).map(userDto);
+  }
+
   async createUser({ input }: { input: UserCreateParams }) {
     const user = new User(input);
     const doc = await user.save();
 
     return userDto(doc as any);
-  }
-
-  async getUsersList(params: UserGetListPArams) {
-    const docs = await User.find({}, null, params);
-    return (docs as any).map(userDto);
   }
 
   async updateUser({ id, input }: { id: string; input: UserUpdateParams }) {

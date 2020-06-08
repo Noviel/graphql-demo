@@ -8,6 +8,6 @@ export const UserSchema = new Schema({
 
 export type UserCreateParams = { email: string; name: string };
 export type UserUpdateParams = Partial<UserCreateParams>;
-export type UserGetListPArams = { limit: number; skip: number };
+export type UserGetListParams = { limit: number; skip: number };
 
 export const User = model('User', UserSchema);

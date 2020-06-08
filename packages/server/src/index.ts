@@ -5,7 +5,7 @@ import { loadSchema, loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { addResolversToSchema } from '@graphql-tools/schema';
 
-import { UserCreateParams, UserUpdateParams } from './models/User';
+import { UserCreateParams, UserUpdateParams, UserGetListParams } from './models/User';
 import { UserAPI } from './datasources/user';
 
 import { connect } from './mongo';
@@ -16,7 +16,10 @@ const schema = loadSchemaSync(join(__dirname, 'schema.graphql'), {
 
 const resolvers = {
   Query: {
-    users: async (_: any, { skip, limit }: any, { dataSources }: any) => {
+    user: async (_: any, { id }: { id: string }, { dataSources }: any) => {
+      return dataSources.userAPI.getUser(id);
+    },
+    users: async (_: any, { skip, limit }: UserGetListParams, { dataSources }: any) => {
       return dataSources.userAPI.getUsersList({ skip, limit });
     },
   },
