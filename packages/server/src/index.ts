@@ -5,7 +5,7 @@ import { loadSchema, loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { addResolversToSchema } from '@graphql-tools/schema';
 
-import { UserCreateParams } from './models/User';
+import { UserCreateParams, UserUpdateParams } from './models/User';
 import { UserAPI } from './datasources/user';
 
 import { connect } from './mongo';
@@ -26,8 +26,13 @@ const resolvers = {
 
       return result;
     },
-    updateUser: async (_: any, params: UserCreateParams, { dataSources }: any) => {
-      const result = await dataSources.userAPI.createUser(params);
+    updateUser: async (_: any, params: { id: string; input: UserUpdateParams }, { dataSources }: any) => {
+      const result = await dataSources.userAPI.updateUser(params);
+
+      return result;
+    },
+    deleteUser: async (_: any, { id }: { id: string }, { dataSources }: any) => {
+      const result = await dataSources.userAPI.deleteUser(id);
 
       return result;
     },
