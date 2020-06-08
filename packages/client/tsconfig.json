@@ -11,11 +11,11 @@
     ],
     "noEmit": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ],
       "src/*": [
         "./src/*"
+      ],
+      "components/*": [
+        "./src/components/*"
       ]
     },
     "skipLibCheck": true,

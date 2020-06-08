@@ -1,9 +1,11 @@
 import { GetStaticProps, NextPageContext } from 'next';
 
+import { UsersList } from 'components/UsersList';
+
 type Props = NextPageContext;
 
 export default function IndexPage(props: Props) {
-  return <div>index page, api: {process.env.NEXT_PUBLIC_GRAPHQL_URI}</div>;
+  return <UsersList />;
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {

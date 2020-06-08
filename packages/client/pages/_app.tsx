@@ -2,14 +2,19 @@ import { default as NextApp, AppProps } from 'next/app';
 import React from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { ApolloProvider } from '@apollo/react-hooks';
 
 import { createTheme } from 'src/theme';
+import { createClient } from 'src/apollo';
 
 interface Props extends AppProps {}
 
 export default class App extends NextApp<Props> {
+  client!: any;
+
   constructor(props: Props) {
     super(props);
+    this.client = createClient();
   }
 
   componentDidMount() {
@@ -27,10 +32,12 @@ export default class App extends NextApp<Props> {
     const component = <Component {...pageProps} />;
 
     return (
-      <ThemeProvider theme={createTheme()}>
-        <CssBaseline />
-        {component}
-      </ThemeProvider>
+      <ApolloProvider client={this.client}>
+        <ThemeProvider theme={createTheme()}>
+          <CssBaseline />
+          {component}
+        </ThemeProvider>
+      </ApolloProvider>
     );
   }
 }
