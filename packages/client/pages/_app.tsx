@@ -29,13 +29,11 @@ export default class App extends NextApp<Props> {
   render() {
     const { Component, pageProps } = this.props;
 
-    const component = <Component {...pageProps} />;
-
     return (
       <ApolloProvider client={this.client}>
         <ThemeProvider theme={createTheme()}>
           <CssBaseline />
-          {component}
+          <Component {...pageProps} />
         </ThemeProvider>
       </ApolloProvider>
     );
