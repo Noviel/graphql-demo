@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
@@ -11,11 +11,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 
 import { USERS_LIST } from 'src/queries';
-
+import { CreateUserDialog } from './CreateUserDialog';
 import { UsersListItem } from './UsersListItem';
-import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,18 +37,36 @@ export const UsersList = () => {
   const { loading, error, data } = useQuery(USERS_LIST);
   const classes = useStyles();
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  const [isCreateUserDialogOpen, setCreateUserDialogOpen] = useState(false);
+
+  const closeCreateUserDialog = () => {
+    setCreateUserDialogOpen(false);
+  };
+
+  const openCreateUserDialog = () => {
+    setCreateUserDialogOpen(true);
+  };
+
+  if (loading) {
+    return (
+      <p>
+        Application is using free <a href="https://heroku.com">Heroku</a> plan. It may take a while to wake it up.
+      </p>
+    );
+  }
+  if (error) {
+    return <p>Something went wrong :(</p>;
+  }
 
   const TABLE_LABEL = 'Users table';
 
   return (
     <Box p={2}>
       <Box display="flex" justifyContent="space-between" pb={3}>
-        <Typography variant="h4" component="h1" gutterBottom>
+        <Typography variant="h4" component="h1">
           Users
         </Typography>
-        <Button variant="contained" color="primary" className={classes.addUserButton}>
+        <Button variant="contained" color="primary" className={classes.addUserButton} onClick={openCreateUserDialog}>
           New User
         </Button>
       </Box>
@@ -69,6 +87,8 @@ export const UsersList = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <CreateUserDialog open={isCreateUserDialogOpen} onClose={closeCreateUserDialog} />
     </Box>
   );
 };

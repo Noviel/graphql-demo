@@ -1,3 +1,4 @@
+import React from 'react';
 import { GetStaticProps, NextPageContext } from 'next';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
