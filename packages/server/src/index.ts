@@ -1,4 +1,4 @@
-import { resolve } from 'path';
+import { join } from 'path';
 import { ApolloServer, gql } from 'apollo-server';
 
 import { loadSchema, loadSchemaSync } from '@graphql-tools/load';
@@ -10,7 +10,7 @@ import { UserAPI } from './datasources/user';
 
 import { connect } from './mongo';
 
-const schema = loadSchemaSync(resolve(__dirname, '.\\schema.graphql'), {
+const schema = loadSchemaSync(join(__dirname, 'schema.graphql'), {
   loaders: [new GraphQLFileLoader()],
 });
 
