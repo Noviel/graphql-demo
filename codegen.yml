@@ -1,0 +1,8 @@
+schema: packages/server/schema.graphql
+generates:
+  ./packages/server/types.d.ts:
+    plugins:
+      - typescript
+  ./packages/client/types.d.ts:
+    plugins:
+      - typescript

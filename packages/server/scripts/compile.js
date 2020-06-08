@@ -1,5 +1,5 @@
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs-extra');
 
 const ncc = require('@zeit/ncc');
 
@@ -7,6 +7,9 @@ const { getEveryDependency } = require('./dependencies');
 
 const ENTRY_POINT = path.resolve(__dirname, '../src/index.ts');
 const OUTPUT = path.resolve(__dirname, '../lib/index.js');
+
+const SCHEMA_INPUT = path.resolve(__dirname, '../src/schema.graphql');
+const SCHEMA_OUTPUT = path.resolve(__dirname, '../lib/schema.graphql');
 
 const externals = getEveryDependency(require.resolve('../package.json'), {
   maxDepth: 2,
@@ -21,6 +24,8 @@ function compile(options = {}) {
       fs.mkdirSync(path.resolve(__dirname, '../lib'));
     }
     fs.writeFileSync(OUTPUT, code);
+    fs.copyFileSync(SCHEMA_INPUT, SCHEMA_OUTPUT);
+
     console.log('Compilation complete.');
   }
 
