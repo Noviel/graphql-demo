@@ -5,7 +5,7 @@ export function createTheme() {
   return createMuiTheme({
     palette: {
       primary: {
-        main: '#224555',
+        main: '#80F',
       },
       secondary: {
         main: '#19857b',
@@ -14,7 +14,7 @@ export function createTheme() {
         main: red.A400,
       },
       background: {
-        default: '#eee',
+        default: '#fafafa',
       },
     },
   });
