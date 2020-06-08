@@ -1,8 +1,10 @@
-schema: packages/server/schema.graphql
+schema: ./packages/server/src/schema.graphql
 generates:
   ./packages/server/types.d.ts:
     plugins:
       - typescript
+      - typescript-resolvers
   ./packages/client/types.d.ts:
     plugins:
       - typescript
+      - typescript-resolvers

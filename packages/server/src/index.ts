@@ -1,40 +1,46 @@
 import { join } from 'path';
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer } from 'apollo-server';
 
-import { loadSchema, loadSchemaSync } from '@graphql-tools/load';
+import { loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { addResolversToSchema } from '@graphql-tools/schema';
 
-import { UserCreateParams, UserUpdateParams, UserGetListParams } from './models/User';
-import { UserAPI } from './datasources/user';
+import { Resolvers } from '../types';
 
 import { connect } from './mongo';
+import { DataSources, dataSources } from './datasources';
 
 const schema = loadSchemaSync(join(__dirname, 'schema.graphql'), {
   loaders: [new GraphQLFileLoader()],
 });
 
-const resolvers = {
+type Context = { dataSources: DataSources };
+
+const resolvers: Resolvers<Context> = {
   Query: {
-    user: async (_: any, { id }: { id: string }, { dataSources }: any) => {
-      return dataSources.userAPI.getUser(id);
+    user: async (_, params, { dataSources }) => {
+      const user = dataSources.userAPI.getUser(params);
+      if (!user) {
+        throw new Error('User not found');
+      }
+      return user;
     },
-    users: async (_: any, { skip, limit }: UserGetListParams, { dataSources }: any) => {
+    users: async (_, { skip, limit }, { dataSources }) => {
       return dataSources.userAPI.getUsersList({ skip, limit });
     },
   },
   Mutation: {
-    createUser: async (_: any, params: UserCreateParams, { dataSources }: any) => {
+    createUser: async (_, params, { dataSources }) => {
       const result = await dataSources.userAPI.createUser(params);
 
       return result;
     },
-    updateUser: async (_: any, params: { id: string; input: UserUpdateParams }, { dataSources }: any) => {
+    updateUser: async (_, params, { dataSources }) => {
       const result = await dataSources.userAPI.updateUser(params);
 
       return result;
     },
-    deleteUser: async (_: any, { id }: { id: string }, { dataSources }: any) => {
+    deleteUser: async (_, { id }, { dataSources }) => {
       const result = await dataSources.userAPI.deleteUser(id);
 
       return result;
@@ -42,11 +48,7 @@ const resolvers = {
   },
 };
 
-const schemaWithResolvers = addResolversToSchema({ schema, resolvers });
-
-const dataSources = () => ({
-  userAPI: new UserAPI(),
-});
+const schemaWithResolvers = addResolversToSchema({ schema, resolvers: resolvers as any });
 
 const server = new ApolloServer({
   schema: schemaWithResolvers,
