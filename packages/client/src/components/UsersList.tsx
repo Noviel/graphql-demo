@@ -17,8 +17,8 @@ import AddIcon from '@material-ui/icons/Add';
 import { USERS_LIST } from 'src/queries';
 import { CreateUserDialog } from './CreateUserDialog';
 import { UsersListItem } from './UsersListItem';
-import { UserDetailsPanel } from './UserDetailsPanel';
 import { EditUserDialog } from './EditUserForm';
+import { UserDetails } from './UserDetails';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,6 +42,7 @@ export const UsersList = () => {
 
   const [isCreateUserDialogOpen, setCreateUserDialogOpen] = useState(false);
   const [isEditUserDialogOpen, setEditUserDialogOpen] = useState(false);
+  const [isUserDetailsOpen, setUserDetailsOpen] = useState(false);
 
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
 
@@ -65,16 +66,18 @@ export const UsersList = () => {
 
   const showUserDetails = (id: string) => {
     setSelectedUserId(id);
+    setUserDetailsOpen(true);
   };
 
-  const hideUserDetails = () => {
+  const closeUserDetails = () => {
     setSelectedUserId(null);
+    setUserDetailsOpen(false);
   };
 
   if (loading) {
     return (
       <p>
-        Application is using free <a href="https://heroku.com">Heroku for a server</a> plan. It may take a while to wake
+        Application is using free <a href="https://heroku.com">Heroku</a> plan for a server. It may take a while to wake
         it up.
       </p>
     );
@@ -124,12 +127,17 @@ export const UsersList = () => {
             })}
           </TableBody>
         </Table>
+        {data.users.length === 0 && (
+          <Box display="flex" justifyContent="center" width="100%" p={3}>
+            <Typography>No users was found</Typography>
+          </Box>
+        )}
       </TableContainer>
-
       <CreateUserDialog open={isCreateUserDialogOpen} onClose={closeCreateUserDialog} />
       {selectedUserId && (
         <EditUserDialog userId={selectedUserId} open={isEditUserDialogOpen} onClose={closeUserEditDialog} />
       )}
+      {selectedUserId && <UserDetails userId={selectedUserId} open={isUserDetailsOpen} onClose={closeUserDetails} />}
     </Box>
   );
 };

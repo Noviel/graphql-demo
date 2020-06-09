@@ -7,28 +7,26 @@ import Box from '@material-ui/core/Box';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
-import { gql } from 'apollo-boost';
-
-import { USERS_LIST } from 'src/queries';
 import { User } from 'types';
 import { useDeleteUser } from 'src/hooks/useDeleteUser';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {},
     dangerButton: {
       color: theme.palette.error.main,
     },
+    clickableRow: {
+      '&:hover': {
+        backgroundColor: '#fafafa',
+      },
+    },
+    clickableCell: {
+      '&:hover': {
+        cursor: 'pointer',
+      },
+    },
   })
 );
-
-const DELETE_USER = gql`
-  mutation DeleteUser($id: ID!) {
-    deleteUser(id: $id) {
-      id
-    }
-  }
-`;
 
 type UsersListItemProps = {
   user: User;
@@ -47,7 +45,6 @@ export const UsersListItem = ({ user, onShowUserDetails, onShowUserEdit }: Users
   }
 
   function showUserEdit(e: React.MouseEvent<HTMLButtonElement>) {
-    console.log('show user', id);
     onShowUserEdit(id);
   }
 
@@ -55,10 +52,10 @@ export const UsersListItem = ({ user, onShowUserDetails, onShowUserEdit }: Users
   const EDIT_BUTTON_LABEL = 'Edit';
 
   return (
-    <TableRow className={classes.root}>
-      <TableCell onClick={showUserDetails}>{id}</TableCell>
-      <TableCell onClick={showUserDetails}>{name}</TableCell>
-      <TableCell onClick={showUserDetails}>{email}</TableCell>
+    <TableRow className={classes.clickableRow}>
+      <TableCell className={classes.clickableCell} onClick={showUserDetails}>{id}</TableCell>
+      <TableCell className={classes.clickableCell} onClick={showUserDetails}>{name}</TableCell>
+      <TableCell className={classes.clickableCell} onClick={showUserDetails}>{email}</TableCell>
       <TableCell>
         <Box ml="auto" display="flex" justifyContent="flex-end">
           <Box mr={0.5}>
