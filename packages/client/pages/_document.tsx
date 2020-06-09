@@ -32,14 +32,13 @@ Document.getInitialProps = async (ctx) => {
   ctx.renderPage = () =>
     originalRenderPage({
       enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
-      enhanceComponent: (Component) => Component,
     });
 
   const initialProps = await NextDocument.getInitialProps(ctx);
 
   return {
     ...initialProps,
-    styles: [<React.Fragment key="styles">{initialProps.styles}</React.Fragment>],
+    styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
   };
 };
 
