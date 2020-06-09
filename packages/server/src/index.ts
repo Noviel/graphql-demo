@@ -23,8 +23,12 @@ const server = new ApolloServer({
   cors: true,
 });
 
-server.listen(process.env.PORT ?? 4201).then(async ({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-
-  await connect();
-});
+connect().then(
+  () =>
+    server.listen(process.env.PORT ?? 4201).then(async ({ url }) => {
+      console.log(`🚀  Server ready at ${url}`);
+    }),
+  (e) => {
+    console.error(`Unable to connect to MongoDB.`);
+  }
+);
