@@ -10,9 +10,16 @@
 - Client application:
   - Next.js, material-ui, apollo libraries
   - CD to [Vercel](https://vercel.com/)
-- Types generation from GraphQL schema
 - Code quality control:
   - linting on commit
+- Developer experience:
+  - types generation from GraphQL schema
+  - automatic server rebuild and restart
+
+## Requirements
+
+- Node.js
+- Yarn
 
 ## Environment variables
 
