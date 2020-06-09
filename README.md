@@ -4,8 +4,8 @@
 
 ## Features
 
-- CRUD GraphQL API server: 
-  - apollo-server + mongoose.
+- CRUD GraphQL API server:
+  - apollo-server + mongoose
   - CD to [Heroku](https://heroku.com)
 - Client application:
   - Next.js, material-ui, apollo libraries
@@ -21,7 +21,7 @@ For local development or launch these variables can be provided by `packages/cli
 
 ## Client
 
-Requires `NEXT_PUBLIC_GRAPHQL_URI` environment variable
+Requires `NEXT_PUBLIC_GRAPHQL_URI` environment variable.
 
 Start development server:
 ```sh
@@ -30,7 +30,7 @@ yarn dev:client
 
 ## Server
 
-Requires `MONGODB_URI` environment variable
+Requires `MONGODB_URI` environment variable.
 
 Start development server:
 ```sh
