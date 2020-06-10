@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     content: {
       minWidth: 420,
+      [theme.breakpoints.down('md')]: {
+        minWidth: 'unset',
+      },
     },
     actions: {
       paddingRight: theme.spacing(3),

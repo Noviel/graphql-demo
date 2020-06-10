@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       justifyContent: 'center',
       padding: theme.spacing(2),
+      width: '100vw',
     },
   })
 );

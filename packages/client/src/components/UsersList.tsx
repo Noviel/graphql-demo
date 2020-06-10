@@ -26,9 +26,20 @@ const useStyles = makeStyles((theme: Theme) =>
     table: {
       minWidth: '700px',
       maxWidth: '60%',
+      [theme.breakpoints.down('sm')]: {
+        minWidth: '300px',
+        maxWidth: '100vw',
+      },
     },
     addUserButton: {
       minWidth: '160px',
+    },
+    idCell: {
+      [theme.breakpoints.down('sm')]: {
+        maxWidth: 100,
+        width: '100px',
+        overflow: 'hidden',
+      },
     },
   })
 );
@@ -71,13 +82,13 @@ export const UsersList = memo(({ openUserCreate, openUserEdit, openUserDetails }
           New User
         </Button>
       </Box>
-      <TableContainer component={Paper} elevation={4}>
-        <Table className={classes.table} aria-label="users table">
+      <TableContainer className={classes.table} component={Paper} elevation={4}>
+        <Table aria-label="users table">
           <TableHead>
             <TableRow>
-              <TableCell>Id</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>
+              <TableCell className={classes.idCell}>Id</TableCell>
+              <TableCell className={classes.idCell}>Name</TableCell>
+              <TableCell className={classes.idCell}>Email</TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>

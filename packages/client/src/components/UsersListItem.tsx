@@ -6,6 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import Box from '@material-ui/core/Box';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+import cx from 'clsx';
 
 import { User } from '@graphql-demo/core/types';
 import { useDeleteUser } from 'src/hooks/useDeleteUser';
@@ -24,6 +25,12 @@ const useStyles = makeStyles((theme: Theme) =>
     clickableCell: {
       '&:hover': {
         cursor: 'pointer',
+      },
+    },
+    idCell: {
+      [theme.breakpoints.down('sm')]: {
+        maxWidth: 100,
+        overflow: 'hidden',
       },
     },
   })
@@ -54,13 +61,13 @@ export const UsersListItem = ({ user, onShowUserDetails, onShowUserEdit }: Users
 
   return (
     <TableRow className={classes.clickableRow}>
-      <TableCell className={classes.clickableCell} onClick={showUserDetails}>
+      <TableCell className={cx(classes.clickableCell, classes.idCell)} onClick={showUserDetails}>
         {id}
       </TableCell>
-      <TableCell className={classes.clickableCell} onClick={showUserDetails}>
+      <TableCell className={cx(classes.clickableCell, classes.idCell)} onClick={showUserDetails}>
         {name}
       </TableCell>
-      <TableCell className={classes.clickableCell} onClick={showUserDetails}>
+      <TableCell className={cx(classes.clickableCell, classes.idCell)} onClick={showUserDetails}>
         {email}
       </TableCell>
       <TableCell>

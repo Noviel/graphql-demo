@@ -1,6 +1,4 @@
-import React, { useCallback } from 'react';
-
-import { isEmail } from '@graphql-demo/core/src/email';
+import React from 'react';
 
 import { FormSubmitEvent } from 'src/types';
 import { useCreateUser } from 'src/hooks/useCreateUser';

@@ -4,6 +4,7 @@ import React from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloClient } from 'apollo-boost';
 
 import { createTheme } from 'src/theme';
 import { createClient } from 'src/apollo';
@@ -13,7 +14,7 @@ const APP_TITLE = 'GraphQL Demo App';
 interface Props extends AppProps {}
 
 export default class App extends NextApp<Props> {
-  client!: any;
+  client!: ApolloClient<any>;
 
   constructor(props: Props) {
     super(props);
@@ -26,8 +27,6 @@ export default class App extends NextApp<Props> {
       jssStyles.parentNode.removeChild(jssStyles);
     }
   }
-
-  componentDidUpdate() {}
 
   render() {
     const { Component, pageProps } = this.props;

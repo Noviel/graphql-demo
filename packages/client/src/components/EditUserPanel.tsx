@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 
 import { User } from '@graphql-demo/core/types';
 import { GET_USER_DETAILS } from 'src/queries';
