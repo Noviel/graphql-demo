@@ -7,7 +7,7 @@ import {
   QueryUsersArgs,
   QueryUserArgs,
   MutationUpdateUserArgs,
-} from '../../types';
+} from '@graphql-demo/core/types';
 
 import { User } from '../models/User';
 

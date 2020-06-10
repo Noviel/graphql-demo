@@ -1,4 +1,4 @@
-import { Resolvers } from '../types';
+import { Resolvers } from '@graphql-demo/core/types';
 
 import { DataSources } from './datasources';
 
