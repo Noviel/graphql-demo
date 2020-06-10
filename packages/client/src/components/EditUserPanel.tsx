@@ -50,6 +50,7 @@ export const EditUserPanel = ({ userId, open, onClose }: EditUserDialogProps) =>
 
   return (
     <UserDetailsPanelBase
+      title="Edit user"
       actionText="Save"
       userId={userId}
       userName={name}

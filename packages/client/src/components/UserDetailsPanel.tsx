@@ -61,19 +61,19 @@ export const UserDetailsPanel = ({ userId, onClose, open }: UserDetailsPanelProp
           'loading'
         ) : (
           <>
-            <DialogContentText>
+            <DialogContentText component="div">
               <Typography variant="body1" color="textSecondary">
                 Id
               </Typography>
               <Typography variant="body2">{userId}</Typography>
             </DialogContentText>
-            <DialogContentText>
+            <DialogContentText component="div">
               <Typography variant="body1" color="textSecondary">
                 Name
               </Typography>
               <Typography variant="body2">{data.user.name}</Typography>
             </DialogContentText>
-            <DialogContentText>
+            <DialogContentText component="div">
               <Typography variant="body1" color="textSecondary">
                 Email
               </Typography>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { isEmail } from '@graphql-demo/core/src/email';
 
@@ -13,17 +13,13 @@ type CreateUserDialogProps = {
 };
 
 export const CreateUserPanel = ({ open, onClose }: CreateUserDialogProps) => {
-  const [name, handleChangeName] = useInputControl('');
-  const [email, handleChangeEmail] = useInputControl('');
+  const [name, handleChangeName, setName] = useInputControl('');
+  const [email, handleChangeEmail, setEmail] = useInputControl('');
 
-  const [createUser, { loading, error }] = useCreateUser(name, email);
+  const [createUser, { loading }] = useCreateUser(name, email);
 
   const submit: FormSubmitEvent = async (event) => {
     event.preventDefault();
-
-    if (!isEmail(email)) {
-      return;
-    }
 
     try {
       await createUser();
@@ -31,15 +27,22 @@ export const CreateUserPanel = ({ open, onClose }: CreateUserDialogProps) => {
     } catch (e) {}
   };
 
+  const close = () => {
+    setName('');
+    setEmail('');
+    onClose();
+  };
+
   return (
     <UserDetailsPanelBase
+      title="Create user"
       actionText="Create"
       submit={submit}
       loading={loading}
       userName={name}
       userEmail={email}
       open={open}
-      onClose={onClose}
+      onClose={close}
       onChangeName={handleChangeName}
       onChangeEmail={handleChangeEmail}
     />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -11,6 +11,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import { Divider } from '@material-ui/core';
 
 import { ButtonClickEvent, InputChangeEvent, FormSubmitEvent } from 'src/types';
+import { isEmail } from '@graphql-demo/core/src/email';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,6 +54,7 @@ interface UserDetailsPanelBaseProps {
   onClose(): void;
 
   actionText: string;
+  title: string;
 }
 
 export const UserDetailsPanelBase = ({
@@ -71,12 +73,29 @@ export const UserDetailsPanelBase = ({
   open,
 
   actionText,
+  title,
 }: UserDetailsPanelBaseProps) => {
   const classes = useStyles();
+
+  const isValidName = userName.length > 0;
+  const isValidEmail = isEmail(userEmail);
+
+  const [isNameTouched, setIsNameTouched] = useState(false);
+  const [isEmailTouched, setIsEmailTouched] = useState(false);
+
+  const displayNameError = isNameTouched && !isValidName;
+  const displayEmailError = isEmailTouched && !isValidEmail;
+
+  const close = () => {
+    setIsNameTouched(false);
+    setIsEmailTouched(false);
+    onClose();
+  };
+
   return (
-    <Dialog open={open} onClose={onClose} aria-labelledby="create-user-dialog-title" maxWidth="xl">
+    <Dialog open={open} onClose={close} aria-labelledby="user-dialog-title" maxWidth="xl">
       <Box className={classes.root}>
-        <DialogTitle id="edit-user-dialog-title">Edit user</DialogTitle>
+        <DialogTitle id="user-dialog-title">{title}</DialogTitle>
         <Divider />
         <form noValidate onSubmit={submit}>
           <DialogContent className={classes.content}>
@@ -103,6 +122,11 @@ export const UserDetailsPanelBase = ({
               fullWidth
               value={userName}
               onChange={onChangeName}
+              error={displayNameError}
+              helperText={displayNameError && 'Name is required'}
+              onBlur={(e) => {
+                setIsNameTouched(true);
+              }}
             />
             <TextField
               variant="outlined"
@@ -113,10 +137,15 @@ export const UserDetailsPanelBase = ({
               fullWidth
               value={userEmail}
               onChange={onChangeEmail}
+              error={displayEmailError}
+              helperText={displayEmailError && 'Incorrect email format'}
+              onBlur={(e) => {
+                setIsEmailTouched(true);
+              }}
             />
           </DialogContent>
           <DialogActions className={classes.actions}>
-            <Button onClick={onClose} color="primary" variant="outlined">
+            <Button onClick={close} color="primary" variant="outlined">
               Cancel
             </Button>
             {onDelete && (
@@ -134,7 +163,7 @@ export const UserDetailsPanelBase = ({
               color="primary"
               variant="contained"
               type="submit"
-              disabled={loading}
+              disabled={loading || !isValidEmail || !isValidName}
               className={classes.createButton}
             >
               {loading ? '...' : actionText}
