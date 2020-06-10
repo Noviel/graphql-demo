@@ -8,7 +8,7 @@ const { getEveryDependency } = require('./dependencies');
 const ENTRY_POINT = path.resolve(__dirname, '../src/index.ts');
 const OUTPUT = path.resolve(__dirname, '../lib/index.js');
 
-const SCHEMA_INPUT = path.resolve(__dirname, '../src/schema.graphql');
+const SCHEMA_INPUT = path.resolve(__dirname, '../../core/src/schema.graphql');
 const SCHEMA_OUTPUT = path.resolve(__dirname, '../lib/schema.graphql');
 
 const externals = getEveryDependency(require.resolve('../package.json'), {

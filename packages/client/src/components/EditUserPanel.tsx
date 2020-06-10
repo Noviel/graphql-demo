@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
-import { User } from 'types';
+import { User } from '@graphql-demo/core/types';
 import { GET_USER_DETAILS } from 'src/queries';
 import { FormSubmitEvent } from 'src/types';
 import { useDeleteUser } from 'hooks/useDeleteUser';

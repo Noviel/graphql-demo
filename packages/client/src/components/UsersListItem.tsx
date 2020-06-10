@@ -7,7 +7,7 @@ import Box from '@material-ui/core/Box';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
-import { User } from 'types';
+import { User } from '@graphql-demo/core/types';
 import { useDeleteUser } from 'src/hooks/useDeleteUser';
 import { useButtonClick } from 'src/hooks/useEventButtonClick';
 

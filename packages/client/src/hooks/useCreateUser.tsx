@@ -1,7 +1,7 @@
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
-import { User } from 'types';
+import { User } from '@graphql-demo/core/types';
 import { USERS_LIST } from 'src/queries';
 import { useButtonClick } from './useEventButtonClick';
 
