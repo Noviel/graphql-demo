@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "packages/client/package.json",
+      "use": "@now/next"
+    }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/",
+      "dest": "/packages/client/src"
+    },
+    {
+      "src": "/_next/(.*)",
+      "dest": "/packages/client/_next/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/packages/client/$1"
+    }
+  ]
+}
