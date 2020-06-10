@@ -34,13 +34,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-type UserDetailsProps = {
+type UserDetailsPanelProps = {
   userId: string;
   open: boolean;
   onClose(): void;
 };
 
-export const UserDetails = ({ userId, onClose, open }: UserDetailsProps) => {
+export const UserDetailsPanel = ({ userId, onClose, open }: UserDetailsPanelProps) => {
   const classes = useStyles();
   const { loading, error, data } = useQuery(GET_USER_DETAILS, {
     variables: {

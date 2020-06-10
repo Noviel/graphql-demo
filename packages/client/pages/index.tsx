@@ -1,32 +1,10 @@
 import React from 'react';
-import { GetStaticProps, NextPageContext } from 'next';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { NextPageContext } from 'next';
 
-import { UsersList } from 'components/UsersList';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      justifyContent: 'center',
-      padding: theme.spacing(2),
-    },
-  })
-);
+import { App } from 'components/App';
 
 type Props = NextPageContext;
 
 export default function IndexPage(props: Props) {
-  const classes = useStyles();
-  return (
-    <div className={classes.root}>
-      <UsersList />
-    </div>
-  );
+  return <App />;
 }
-
-export const getStaticProps: GetStaticProps = async (context) => {
-  return {
-    props: {},
-  };
-};

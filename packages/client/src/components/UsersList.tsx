@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
@@ -15,10 +15,7 @@ import Box from '@material-ui/core/Box';
 import AddIcon from '@material-ui/icons/Add';
 
 import { USERS_LIST } from 'src/queries';
-import { CreateUserPanel } from './CreateUserPanel';
 import { UsersListItem } from './UsersListItem';
-import { EditUserPanel } from './EditUserPanel';
-import { UserDetails } from './UserDetailsPanel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,43 +33,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const UsersList = () => {
+interface UserListProps {
+  openUserCreate(): void;
+  openUserEdit(id: string): void;
+  openUserDetails(id: string): void;
+}
+
+export const UsersList = memo(({ openUserCreate, openUserEdit, openUserDetails }: UserListProps) => {
   const { loading, error, data } = useQuery(USERS_LIST);
   const classes = useStyles();
-
-  const [isCreateUserDialogOpen, setCreateUserDialogOpen] = useState(false);
-  const [isEditUserDialogOpen, setEditUserDialogOpen] = useState(false);
-  const [isUserDetailsOpen, setUserDetailsOpen] = useState(false);
-
-  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
-
-  const closeCreateUserDialog = () => {
-    setCreateUserDialogOpen(false);
-  };
-
-  const openCreateUserDialog = () => {
-    setCreateUserDialogOpen(true);
-  };
-
-  const closeUserEditDialog = () => {
-    setEditUserDialogOpen(false);
-    setSelectedUserId(null);
-  };
-
-  const openUserEditDialog = (id: string) => {
-    setEditUserDialogOpen(true);
-    setSelectedUserId(id);
-  };
-
-  const showUserDetails = (id: string) => {
-    setSelectedUserId(id);
-    setUserDetailsOpen(true);
-  };
-
-  const closeUserDetails = () => {
-    setSelectedUserId(null);
-    setUserDetailsOpen(false);
-  };
 
   if (loading) {
     return (
@@ -96,7 +65,7 @@ export const UsersList = () => {
           variant="contained"
           color="primary"
           className={classes.addUserButton}
-          onClick={openCreateUserDialog}
+          onClick={openUserCreate}
           startIcon={<AddIcon />}
         >
           New User
@@ -118,8 +87,8 @@ export const UsersList = () => {
                 <UsersListItem
                   key={user.id}
                   user={user}
-                  onShowUserDetails={showUserDetails}
-                  onShowUserEdit={openUserEditDialog}
+                  onShowUserDetails={openUserDetails}
+                  onShowUserEdit={openUserEdit}
                 />
               );
             })}
@@ -131,11 +100,8 @@ export const UsersList = () => {
           </Box>
         )}
       </TableContainer>
-      <CreateUserPanel open={isCreateUserDialogOpen} onClose={closeCreateUserDialog} />
-      {selectedUserId && (
-        <EditUserPanel userId={selectedUserId} open={isEditUserDialogOpen} onClose={closeUserEditDialog} />
-      )}
-      {selectedUserId && <UserDetails userId={selectedUserId} open={isUserDetailsOpen} onClose={closeUserDetails} />}
     </Box>
   );
-};
+});
+
+UsersList.displayName = 'UsersList';
