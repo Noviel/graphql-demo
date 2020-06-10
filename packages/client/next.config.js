@@ -1,12 +1,9 @@
-// require('dotenv').config();
 const TSConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const withTM = require('next-transpile-modules')(['@graphql-demo/core']);
 
 const config = {
   experimental: {
     modern: true,
-  },
-  env: {
-    FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
   },
   pageExtensions: ['tsx'],
   webpack(config = {}, options) {
@@ -25,8 +22,16 @@ const config = {
       fs: 'empty',
     };
 
+    config.module.rules.forEach((rule) => {
+      const ruleContainsTs = rule.test && rule.test.toString().includes('ts|tsx');
+
+      if (ruleContainsTs && rule.use && rule.use.loader === 'next-babel-loader') {
+        rule.include = undefined;
+      }
+    });
+
     return config;
   },
 };
 
-module.exports = config;
+module.exports = withTM(config);

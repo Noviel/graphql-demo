@@ -12,6 +12,7 @@
     "start": "node lib/index.js"
   },
   "dependencies": {
+    "@graphql-demo/core": "0.1.0",
     "@types/mongoose": "^5.7.22",
     "@zeit/ncc": "^0.22.3",
     "apollo-server": "^2.14.2",

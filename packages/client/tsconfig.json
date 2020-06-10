@@ -33,7 +33,8 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "../core/src/**/*.ts"
   ],
   "exclude": [
     "node_modules"

@@ -2,9 +2,12 @@ import { Resolvers } from '../types';
 
 import { DataSources } from './datasources';
 
+import { EmailScalarType } from '@graphql-demo/core/src/email';
+
 type Context = { dataSources: DataSources };
 
 export const resolvers: Resolvers<Context> = {
+  Email: EmailScalarType,
   Query: {
     user: async (_, params, { dataSources }) => {
       return dataSources.userAPI.getUser(params);

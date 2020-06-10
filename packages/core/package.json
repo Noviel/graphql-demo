@@ -1,0 +1,18 @@
+{
+  "name": "@graphql-demo/core",
+  "version": "0.1.0",
+  "description": "Graphql Demo: core",
+  "author": "Alexander \"Snov\" Semenchenko",
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "watch": "node scripts/watch.js",
+    "dev": "nodemon -r dotenv/config lib/index.js",
+    "start": "node lib/index.js"
+  },
+  "dependencies": {
+    "graphql": "^15.1.0",
+    "graphql-tools": "^6.0.8",
+    "typescript": "^3.9.5"
+  }
+}

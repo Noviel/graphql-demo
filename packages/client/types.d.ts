@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 export type Maybe<T> = T | null;
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
@@ -8,7 +8,9 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Email: any;
 };
+
 
 export type Query = {
   __typename?: 'Query';
@@ -53,17 +55,17 @@ export type MutationDeleteUserArgs = {
 export type User = {
   __typename?: 'User';
   id: Scalars['ID'];
-  email: Scalars['String'];
+  email: Scalars['Email'];
   name: Scalars['String'];
 };
 
 export type CreateUserInput = {
-  email: Scalars['String'];
+  email: Scalars['Email'];
   name: Scalars['String'];
 };
 
 export type UpdateUserInput = {
-  email?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['Email']>;
   name?: Maybe<Scalars['String']>;
 };
 
@@ -145,6 +147,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  Email: ResolverTypeWrapper<Scalars['Email']>;
   Query: ResolverTypeWrapper<{}>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -158,6 +161,7 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  Email: Scalars['Email'];
   Query: {};
   ID: Scalars['ID'];
   Int: Scalars['Int'];
@@ -168,6 +172,10 @@ export type ResolversParentTypes = {
   UpdateUserInput: UpdateUserInput;
   Boolean: Scalars['Boolean'];
 };
+
+export interface EmailScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Email'], any> {
+  name: 'Email';
+}
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
@@ -182,12 +190,13 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  email?: Resolver<ResolversTypes['Email'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 };
 
 export type Resolvers<ContextType = any> = {
+  Email?: GraphQLScalarType;
   Query?: QueryResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   User?: UserResolvers<ContextType>;

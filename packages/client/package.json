@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
+    "@graphql-demo/core": "file:../core",
     "@material-ui/core": "^4.10.1",
     "@material-ui/icons": "^4.9.1",
     "apollo-boost": "^0.4.9",
     "graphql": "^15.1.0",
     "next": "^9.4.4",
+    "next-transpile-modules": "^3.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "tsconfig-paths-webpack-plugin": "^3.2.0",

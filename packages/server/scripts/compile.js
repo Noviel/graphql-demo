@@ -13,6 +13,7 @@ const SCHEMA_OUTPUT = path.resolve(__dirname, '../lib/schema.graphql');
 
 const externals = getEveryDependency(require.resolve('../package.json'), {
   maxDepth: 2,
+  exclude: [/^@graphql-demo/],
 });
 
 function compile(options = {}) {
