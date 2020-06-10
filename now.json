@@ -12,7 +12,7 @@
     },
     {
       "src": "/",
-      "dest": "/packages/client/src"
+      "dest": "/packages/client"
     },
     {
       "src": "/_next/(.*)",

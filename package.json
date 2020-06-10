@@ -10,7 +10,9 @@
     "dev:client": "yarn workspace @graphql-demo/client dev",
     "dev:server": "concurrently \"yarn workspace @graphql-demo/server watch\" \"yarn workspace @graphql-demo/server dev\"",
     "build:server": "yarn workspace @graphql-demo/server build",
-    "codegen": "graphql-codegen"
+    "codegen": "graphql-codegen",
+    "build": "yarn workspace @graphql-demo/server build",
+    "start": "yarn workspace @graphql-demo/server start"
   },
   "workspaces": {
     "packages": [
