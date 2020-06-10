@@ -9,3 +9,13 @@ export const USERS_LIST = gql`
     }
   }
 `;
+
+export const GET_USER_DETAILS = gql`
+  query GetUserDetails($id: ID!) {
+    user(id: $id) {
+      id
+      name
+      email
+    }
+  }
+`;

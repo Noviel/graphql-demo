@@ -14,7 +14,7 @@ export const DELETE_USER = gql`
 `;
 
 export function useDeleteUser(id: string) {
-  const [deleteUser] = useMutation<any>(DELETE_USER, {
+  const [deleteUser, info] = useMutation<any>(DELETE_USER, {
     variables: {
       id,
     },
@@ -37,5 +37,5 @@ export function useDeleteUser(id: string) {
 
   const deleteUserClickHandler = useButtonClick((e) => deleteUser(), [deleteUser]);
 
-  return { deleteUser, deleteUserClickHandler };
+  return [deleteUser, deleteUserClickHandler, info] as const;
 }

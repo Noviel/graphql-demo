@@ -15,10 +15,10 @@ import Box from '@material-ui/core/Box';
 import AddIcon from '@material-ui/icons/Add';
 
 import { USERS_LIST } from 'src/queries';
-import { CreateUserDialog } from './CreateUserDialog';
+import { CreateUserPanel } from './CreateUserPanel';
 import { UsersListItem } from './UsersListItem';
-import { EditUserDialog } from './EditUserForm';
-import { UserDetails } from './UserDetails';
+import { EditUserPanel } from './EditUserPanel';
+import { UserDetails } from './UserDetailsPanel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -86,8 +86,6 @@ export const UsersList = () => {
     return <p>Something went wrong :(</p>;
   }
 
-  const TABLE_LABEL = 'Users table';
-
   return (
     <Box p={2}>
       <Box display="flex" justifyContent="space-between" pb={3}>
@@ -105,7 +103,7 @@ export const UsersList = () => {
         </Button>
       </Box>
       <TableContainer component={Paper} elevation={4}>
-        <Table className={classes.table} aria-label={TABLE_LABEL}>
+        <Table className={classes.table} aria-label="users table">
           <TableHead>
             <TableRow>
               <TableCell>Id</TableCell>
@@ -133,9 +131,9 @@ export const UsersList = () => {
           </Box>
         )}
       </TableContainer>
-      <CreateUserDialog open={isCreateUserDialogOpen} onClose={closeCreateUserDialog} />
+      <CreateUserPanel open={isCreateUserDialogOpen} onClose={closeCreateUserDialog} />
       {selectedUserId && (
-        <EditUserDialog userId={selectedUserId} open={isEditUserDialogOpen} onClose={closeUserEditDialog} />
+        <EditUserPanel userId={selectedUserId} open={isEditUserDialogOpen} onClose={closeUserEditDialog} />
       )}
       {selectedUserId && <UserDetails userId={selectedUserId} open={isUserDetailsOpen} onClose={closeUserDetails} />}
     </Box>

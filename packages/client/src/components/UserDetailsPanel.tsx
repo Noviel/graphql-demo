@@ -1,12 +1,12 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
 
-import { Button, DialogContent, DialogContentText, Typography } from '@material-ui/core';
+import { Button, DialogContent, DialogContentText, Typography, Divider } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import { GET_USER_DETAILS } from 'src/queries';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,16 +34,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const USER_DETAILS = gql`
-  query User($id: ID!) {
-    user(id: $id) {
-      id
-      name
-      email
-    }
-  }
-`;
-
 type UserDetailsProps = {
   userId: string;
   open: boolean;
@@ -52,17 +42,20 @@ type UserDetailsProps = {
 
 export const UserDetails = ({ userId, onClose, open }: UserDetailsProps) => {
   const classes = useStyles();
-  const { loading, error, data } = useQuery(USER_DETAILS, {
+  const { loading, error, data } = useQuery(GET_USER_DETAILS, {
     variables: {
       id: userId,
     },
   });
 
-  if (error) return <p>Error :(</p>;
+  if (error) {
+    return <p>Error :(</p>;
+  }
 
   return (
     <Dialog open={open} onClose={onClose} aria-labelledby="user-details-title" maxWidth="xl">
       <DialogTitle id="user-details-title">User details</DialogTitle>
+      <Divider />
       <DialogContent className={classes.content}>
         {loading ? (
           'loading'
