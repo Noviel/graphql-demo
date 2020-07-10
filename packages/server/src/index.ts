@@ -29,6 +29,6 @@ connect().then(
       console.log(`🚀  Server ready at ${url}`);
     }),
   (e) => {
-    console.error(`Unable to connect to MongoDB.`);
+    console.error(`Unable to connect to MongoDB.`, e);
   }
 );
