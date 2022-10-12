@@ -15,7 +15,7 @@
     "@graphql-demo/core": "0.1.0",
     "@types/mongoose": "^5.7.22",
     "@zeit/ncc": "^0.22.3",
-    "apollo-server": "^2.14.2",
+    "apollo-server": "^2.25.4",
     "deepmerge": "^4.2.2",
     "dotenv": "^8.2.0",
     "graphql": "^15.1.0",
